@@ -18,10 +18,12 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install and run SensorThingsAPI
-      uses: cgs-earth/sensorthings-action
+      uses: ./
     - name: Install requirements 📦
       run: |
         pip3 install pygeoapi
+        pip3 install pytest
+        pip3 install requests
     - name: run unit tests ⚙️
       run: |
         pytest test_sensorthings.py
@@ -29,3 +31,4 @@ jobs:
       if: ${{ failure() }}
       run: |
         pip3 list -v
+        docker ps

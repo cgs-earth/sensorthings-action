@@ -46,11 +46,16 @@ outputs:
   sta:
     description: 'sensorthings server'
 runs:
-runs:
   using: "composite"
   steps:
     - shell: bash
       run: |
+        docker build -t sensorthings-api .
+    - shell: bash
+      run: |
         docker run \
          -v /var/run/docker.sock:/var/run/docker.sock \
-         sta up ${{ inputs.table }} ${{ inputs.username }} ${{ inputs.password }}
+         sensorthings-api up ${{ inputs.table }} ${{ inputs.username }} ${{ inputs.password }}
+    - shell: bash
+      run: |
+        docker ps
