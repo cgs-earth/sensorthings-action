@@ -28,7 +28,13 @@
 # =================================================================
 
 name: 'SensorThings Database'
+
 description: 'Test SensorThings API Database'
+
+branding:
+  icon: server
+  color: purple
+
 inputs:
   table:
     description: 'postgres table name'
