@@ -50,12 +50,8 @@ runs:
   steps:
     - shell: bash
       run: |
-        docker build -t sensorthings-api .
-    - shell: bash
-      run: |
         docker run \
          -v /var/run/docker.sock:/var/run/docker.sock \
-         sensorthings-api up ${{ inputs.table }} ${{ inputs.username }} ${{ inputs.password }}
-    - shell: bash
-      run: |
-        docker ps
+         ghcr.io/cgs-earth/sensorthings-action:latest \
+         up \
+         ${{ inputs.table }} ${{ inputs.username }} ${{ inputs.password }}
