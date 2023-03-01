@@ -27,6 +27,6 @@
 #
 # =================================================================
 
-FROM ghcr.io/baosystems/postgis:14-3.2
+FROM postgis/postgis:14-3.2
 
 COPY backup.sql.gz /docker-entrypoint-initdb.d/backup.sql.gz
