@@ -27,7 +27,7 @@
 #
 # =================================================================
 
-FROM docker/compose
+FROM docker/compose:1.28.0
 
 COPY . /sensorthings
 
