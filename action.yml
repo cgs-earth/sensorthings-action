@@ -58,6 +58,6 @@ runs:
       run: |
         docker run \
          -v /var/run/docker.sock:/var/run/docker.sock \
-         ghcr.io/cgs-earth/sensorthings-action:latest \
+         ghcr.io/cgs-earth/sensorthings-action:0.1.0 \
          up \
          ${{ inputs.table }} ${{ inputs.username }} ${{ inputs.password }}
