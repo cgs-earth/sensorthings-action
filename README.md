@@ -2,7 +2,7 @@
 [![Build](https://github.com/cgs-earth/sensorthings-action/actions/workflows/main.yml/badge.svg)](https://github.com/cgs-earth/sensorthings-action/actions/workflows/main.yml)
 
 This action runs a SensorThings API services using the [FROST-Server](https://github.com/FraunhoferIOSB/FROST-Server).
-This is not meant to be used for unit testing only.
+This is meant to be used for unit testing only.
 
 ## Inputs
 
