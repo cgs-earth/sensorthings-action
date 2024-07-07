@@ -1,4 +1,4 @@
-# SensorThings API demp server
+# SensorThings API demo server
 [![Build](https://github.com/cgs-earth/sensorthings-action/actions/workflows/main.yml/badge.svg)](https://github.com/cgs-earth/sensorthings-action/actions/workflows/main.yml)
 
 This action runs a SensorThings API services using the [FROST-Server](https://github.com/FraunhoferIOSB/FROST-Server).
