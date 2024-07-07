@@ -2,7 +2,7 @@
 #
 # Authors: Benjamin Webb <bwebb@lincolninst.edu>
 #
-# Copyright (c) 2022 Benjamin Webb
+# Copyright (c) 2024 Benjamin Webb
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation
@@ -48,14 +48,13 @@ def config():
 def test_query_datastreams(config):
     p = SensorThingsProvider(config)
     fields = p.get_fields()
-    assert len(fields) == 15
+    assert len(fields) == 16
     assert fields['Thing']['type'] == 'number'
     assert fields['Observations']['type'] == 'number'
     assert fields['@iot.id']['type'] == 'number'
     assert fields['name']['type'] == 'string'
 
-    kwargs = {'sortby': [{'property': '@iot.id', 'order': '+'}]}
-    results = p.query(**kwargs)
+    results = p.query()
     assert len(results['features']) == 10
     assert results['numberReturned'] == 10
     assert len(results['features'][0]['properties']['Observations']) == 17
@@ -63,15 +62,15 @@ def test_query_datastreams(config):
     assert results['features'][0]['geometry']['coordinates'][0] == -108.7483
     assert results['features'][0]['geometry']['coordinates'][1] == 35.6711
 
-    results = p.query(limit=1, **kwargs)
+    results = p.query(limit=1)
     assert len(results['features']) == 1
     assert results['features'][0]['id'] == '1'
 
-    results = p.query(offset=2, limit=1, **kwargs)
+    results = p.query(offset=2, limit=1)
     assert len(results['features']) == 1
     assert results['features'][0]['id'] == '3'
 
-    assert len(results['features'][0]['properties']) == 17
+    assert len(results['features'][0]['properties']) == 18
 
     results = p.query(bbox=[-109, 36, -106, 37])
     assert results['numberReturned'] == 8
@@ -89,6 +88,7 @@ def test_query_datastreams(config):
 def test_query_observations(config):
     config['properties'] = ['Datastream', 'phenomenonTime',
                             'FeatureOfInterest', 'result']
+    config['data'] = 'http://localhost:8888/FROST-Server/v1.1/'
     config['entity'] = 'Observations'
     p = SensorThingsProvider(config)
 
