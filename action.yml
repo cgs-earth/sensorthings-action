@@ -48,16 +48,21 @@ inputs:
     description: 'database password'
     required: true
     default: 'ChangeMe'
-outputs:
-  sta:
-    description: 'sensorthings server'
 runs:
   using: "composite"
   steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v4
+      with:
+        path: sta
+        sparse-checkout: |
+          .
+          postgis
     - shell: bash
+      env:
+        POSTGRES_TABLE: ${{ inputs.table }}
+        POSTGRES_USER: ${{ inputs.username }}
+        POSTGRES_PASS: ${{ inputs.password }}
       run: |
-        docker run \
-         -v /var/run/docker.sock:/var/run/docker.sock \
-         ghcr.io/cgs-earth/sensorthings-action:0.1.0 \
-         up \
-         ${{ inputs.table }} ${{ inputs.username }} ${{ inputs.password }}
+        cd sta
+        docker compose up -d
