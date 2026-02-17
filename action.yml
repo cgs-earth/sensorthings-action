@@ -48,21 +48,28 @@ inputs:
     description: 'database password'
     required: true
     default: 'ChangeMe'
+  version:
+    description: 'version of the SensorThings Actions to use'
+    required: false
+    default: '0.1.2'
 runs:
   using: "composite"
   steps:
-    - name: Checkout repository and submodules
-      uses: actions/checkout@v4
-      with:
-        path: sta
-        sparse-checkout: |
-          .
-          postgis
+    # - name: Checkout repository and submodules
+    #   uses: actions/checkout@v4
+    #   with:
+    #     path: sta
+    #     sparse-checkout: |
+    #       .
+    #       postgis
     - shell: bash
       env:
         POSTGRES_TABLE: ${{ inputs.table }}
         POSTGRES_USER: ${{ inputs.username }}
         POSTGRES_PASS: ${{ inputs.password }}
       run: |
-        cd sta
-        docker compose up -d
+        docker run \
+         -v /var/run/docker.sock:/var/run/docker.sock \
+         ghcr.io/cgs-earth/sensorthings-action:${{ inputs.version }} \
+         up \
+         ${{ inputs.table }} ${{ inputs.username }} ${{ inputs.password }}

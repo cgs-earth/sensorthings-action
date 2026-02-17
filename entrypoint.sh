@@ -55,4 +55,4 @@ fi
 
 echo -e $STAENV > $PWD/sta.env
 
-exec docker-compose --env-file $PWD/sta.env "$1"  -d
+exec docker compose --env-file $PWD/sta.env "$1"  -d

@@ -17,7 +17,12 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install and run SensorThingsAPI
-      uses: ./
+      env:
+        POSTGRES_TABLE: sensorthings
+        POSTGRES_USER: sensorthings
+        POSTGRES_PASS: ChangeMe
+      run: |
+        docker compose up -d
     - name: Install requirements 📦
       run: |
         pip3 install pygeoapi
